@@ -1,0 +1,23 @@
+{
+  "name": "web-gallery-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arun Patel",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.6.0",
+    "graphql-playground-middleware-express": "^1.7.12",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.7.0",
+    "mongodb": "^3.5.5"
+  }
+}
