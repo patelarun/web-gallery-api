@@ -4,7 +4,7 @@ const cors = require('cors');
 const schema = require('./schema');
 const startDatabase = require('./database');
 const expressPlayground = require('graphql-playground-middleware-express').default;
-const isTokenValid = require('./authentication');
+const resolvers = require('./resolvers');
 
 const context = async req => {
   const db = await startDatabase();
@@ -13,15 +13,6 @@ const context = async req => {
   return { db, token };
 };
 
-const resolvers = {
-  posts: async ({ userId, skip, size }, context) => {
-    const { db, token } = await context();
-    const { error, decoded } = await isTokenValid(token);
-
-    const posts = await db.collection('posts').findOne({ userId }).skip(skip).limit(size);
-    return posts.toArray();
-  },
-};
 
 const app = express();
 app.use(
@@ -31,6 +22,7 @@ app.use(
     schema,
     rootValue: resolvers,
     context: () => context(req),
+    introspection: true,
   })),
 );
 app.get('/playground', expressPlayground({ endpoint: '/graphql' }));
